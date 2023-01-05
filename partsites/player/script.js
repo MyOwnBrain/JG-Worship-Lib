@@ -14,10 +14,11 @@ add_cancel.addEventListener("click", () => {
 
 add_submit.addEventListener("click", () => {
     add_window.style.display = "none";
-    const video_link = add_window.querySelector("div input").value;
-    if (video_link.startsWith("https://www.youtube.com/watch?v=")) {
+    const video_link = add_window.querySelector("div input");
+    if (video_link.value.startsWith("https://www.youtube.com/watch?v=")) {
         iframe.src = "https://www.youtube.com/embed/" + video_link.split(/[=&]+/)[1];
     } else {
         alert("Please paste youtube Video Link in there!")
     }
+    video_link.value = "";
 })
