@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/standard.css">
+        <link rel="stylesheet" href="main.css">
+        <script src="scripts/loading.js" defer></script>
+        <script src="scripts/smartphone.js" defer></script>
+        <script src="main.js" defer></script>
+        <title>Worship Lib</title>
+    </head>
+    <body>
+        <div class="loader-window" id="loader-window">
+            <div class="loader" id="loader">
+                <div class="load-status" id="load-status">
+                    <span id="percent">0%</span>
+                    <div class="loader-label" id="loader-label"></div>
+                </div>
+            </div>
+        </div>
+        <header>
+            <a href="index.html" class="title" id="title">
+                <img src="images/logo/filled.png" alt="logo">
+                <span>Worship Library</span>
+            </a>
+            <nav class="nav-top" id="nav-top">
+                <ul class="nav-links" id="nav-links">
+                    <li id="to-about">About</li>
+                    <li id="to-contact">Contact</li>
+                    <li id="to-other">Other</li>
+                </ul>
+            </nav>
+        </header>
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <button class="close-sidebar" id="close-sidebar"><img src="images/sidebar/close.png" alt="close"></button>
+                <li><a href="index.html"><img src="images/sidebar/home.png" alt="home">Home</a></li>
+                <li><a href="partsites/songlist/index.html" target="_self"><img src="images/sidebar/list.png" alt="song_list">Song List</a></li>
+                <li><a href="partsites/player/index.html" target="_self"><img src="images/sidebar/player.png" alt="player">Player</a></li>
+                <li><a href="partsites/generator/index.html" target="_self"><img src="images/sidebar/random.png" alt="random_generator">Random Song</a></li>
+            </ul>
+        </div>
+        <main class="main" id="main">
+            <div class="grid" id="grid">
+                <div class="headline" id="headline">
+                    <button class="open-sidebar" id="open-sidebar">
+                        <img src="images/sidebar/menu.png" alt="menu">
+                    </button>
+                    <h1>Worship Library</h1>
+                    <img src="images/main/headline/musicnote.png" alt="musical note">
+                    <img src="images/main/headline/musicnote.png" alt="musical note">
+                    <img src="images/logo/filled.png" alt="logo">
+                    <img src="images/main/headline/musicnote.png" alt="musical note">
+                    <img src="images/main/headline/musicnote.png" alt="musical note">
+                </div>
+                <div class="about" id="about">
+                    <h1>About</h1>
+                    <p>Worship Song Library has a list with Worship-Songs. You can use a filter to search under cartain criteria. If you want to learn to play a Song on an instrument you can look at, the chords which are given to every Song. The Random Generator generates a random Song for you. Hover over the Sidebar to go to one of these things.</p>
+                    <p>Some features are not available </p>
+                </div>
+                <div class="contact" id="contact">
+                    <h1>Contact</h1>
+                    <p>
+                        <a href="https://www.instagram.com/piano.niklas/" target="_blank">
+                            <img src="images/main/socials/instagram.png" alt="instagram">
+                            Instagram
+                        </a>
+                        <a href="https://www.tiktok.com/@myownbrain37" target="_blank">
+                            <img src="images/main/socials/tiktok.png" alt="tiktok">
+                            TikTok
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,150 @@
+:root {
+    font-size: 1rem;
+
+    --bar-size: 3.125rem;
+
+    /* colors */
+    --font-color: #ffc107;
+    --dark-1: #191923;
+    --dark-2: #1e1e28;
+    --dark-3: #20202a;
+    --dark-4: #24242e;
+    --dark-5: #2b2b36;
+    --dark-6: #2c2c38;
+    --invalid: #ff0037;
+    --placeholder: #737375;
+}
+
+.main {
+    gap: 0.5rem;
+    flex-direction: row;
+}
+
+/* queue */
+
+.queue {
+    height: 100%;
+    width: 20rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.queue_ctrl {
+    background: var(--dark-2);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.queue_ctrl button{
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: var(--dark-4);
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.queue_ctrl button img {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
+}
+
+.queue_list {
+    background: var(--dark-2);
+    border-radius: 0.5rem;
+    height: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.queue_list li {
+    list-style: none;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: var(--dark-4);
+}
+
+/* video */
+
+.video {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.iframe {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+/* add window */
+
+.add_window {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: #00000037;
+    backdrop-filter: grayscale(0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: ease 1s;
+}
+
+.add_popup {
+    position: relative;
+    width: 40rem;
+    background: var(--dark-3);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.add_popup span {
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+.add_popup input {
+    all: unset;
+    background: var(--dark-1);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.add_control {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_control button {
+    all: unset;
+    padding: 0.5rem;
+    background: var(--dark-1);
+    width: 4rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+}

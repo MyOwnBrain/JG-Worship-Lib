@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../../styles/standard.css">
+        <script src="../../scripts/loading.js" defer></script>
+        <script src="../../scripts/smartphone.js" defer></script>
+        <script src="script.js" defer></script>
+        <title>Worship Lib Player</title>
+    </head>
+    <body>
+        <div class="loader-window" id="loader-window">
+            <div class="loader" id="loader">
+                <div class="load-status" id="load-status">
+                    <span id="percent">0%</span>
+                    <div class="loader-label" id="loader-label"></div>
+                </div>
+            </div>
+        </div>
+        <div class="add_window" id="add_window">
+            <div class="add_popup">
+                <span>Enter Video URL:</span>
+                <input type="url" placeholder="only YouTube supported yet">
+                <div class="add_control">
+                    <button id="add_cancel">Cancel</button>
+                    <button id="add_submit">Add</button>
+                </div>
+            </div>
+        </div>
+        <header>
+            <a href="../../index.html" class="title" id="title">
+                <img src="../../images/logo/filled.png" alt="logo">
+                <span>Worship Library</span>
+            </a>
+            <a href="index.html" class="ps_name" id="ps_name">
+                <span>Player</span>
+            </a>
+        </header>
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <button class="close-sidebar" id="close-sidebar"><img src="../../images/sidebar/close.png" alt="close"></button>
+                <li><a href="../../index.html" target="_self"><img src="../../images/sidebar/home.png" alt="home">Home</a></li>
+                <li><a href="../songlist/index.html" target="_self"><img src="../../images/sidebar/list.png" alt="song_list">Song List</a></li>
+                <li><a href="index.html" target="_self"><img src="../../images/sidebar/player.png" alt="player">Player</a></li>
+                <li><a href="../generator/index.html"><img src="../../images/sidebar/random.png" alt="random_generator">Random Song</a></li>
+            </ul>
+        </div>
+        <main class="main" id="main">
+            <button class="open-sidebar" id="open-sidebar">
+                <img src="../../images/sidebar/menu.png" alt="menu">
+            </button>
+            <div class="queue" id="queue">
+                <div class="queue_ctrl">
+                    <button id="add">+</button>
+                    <button id="play"><img src="../../images/sidebar/player.png" alt="play"></button>
+                </div>
+                <ul class="queue_list">
+                    <li draggable="true">1</li>
+                    <li draggable="true">2</li>
+                    <li draggable="true">3</li>
+                    <li draggable="true">4</li>
+                </ul>
+            </div>
+            <div class="video">
+                <iframe class="iframe" id="iframe" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </main>
+    </body>
+</html>
