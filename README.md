@@ -1,6 +1,6 @@
 # JG-Worship-Lib
 
-### [Preview](https://myownbrain.github.io/snow-parallax/)
+### [Preview](https://myownbrain.github.io/JG-Worship-Lib/)
 ---
 ### [TikTok Account](https://www.tiktok.com/@myownbrain37) More Coding and Music Videos 👨‍💻
 
