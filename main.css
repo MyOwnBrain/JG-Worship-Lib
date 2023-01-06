@@ -13,6 +13,32 @@
     --dark-6: #2c2c38;
 }
 
+.nav-top {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0.313rem;
+    padding: 0.313rem;
+}
+
+.nav-top li {
+    display: inline-block;
+    margin: 0 0.313rem;
+    padding: 0 1.25rem;
+    font-size: 1rem;
+    background-color: var(--dark-4);
+    border: none;
+    border-radius: 0.625rem;
+}
+
+.nav-top li {
+    transition: all ease-in-out 250ms;
+}
+
+.nav-top li:hover {
+    background-color: var(--dark-5);
+}
+
 .grid {
     display: grid;
     grid-template-columns: 50%;
