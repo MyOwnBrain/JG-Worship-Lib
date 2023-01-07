@@ -97,6 +97,10 @@ header {
     z-index: 1;
 }
 
+header a {
+    all: unset;
+}
+
 .title {
     display: flex;
     cursor: pointer;
@@ -109,8 +113,8 @@ header {
 }
 
 .title img {
-    width: 2rem;
-    height: 2rem;
+    max-width: 2rem;
+    max-height: 2rem;
     filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
 }
 
