@@ -109,10 +109,8 @@ header {
 }
 
 .title img {
-    width: auto;
-    height: auto;
-    max-width: 2rem;
-    max-height: 2rem;
+    width: 2rem;
+    height: 2rem;
     filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
 }
 
