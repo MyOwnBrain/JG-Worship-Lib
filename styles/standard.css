@@ -20,7 +20,7 @@
 @font-face {
     font-family: "poppins";
     src: url(../fonts/poppins/Poppins-Medium.ttf);
-    font-display: auto;
+    font-display: swap;
 }
 
 /* all */
