@@ -78,7 +78,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-image: url(images/main/headline/wallpaper.jpg), linear-gradient(-45deg, var(--dark-4), var(--dark-6));
+    background-image: url(images/main/wallpaper.avif), linear-gradient(-45deg, var(--dark-4), var(--dark-6));
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
