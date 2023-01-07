@@ -1,5 +1,3 @@
-const main = document.getElementById("main");
-
 // loading
 
 const loader_window = document.getElementById("loader-window")
@@ -20,7 +18,7 @@ window.addEventListener("load", () => {
         }
     }, 10)
 
-    loader_label.style.transform = "translate(0%)";
+    loader_label.style.transform = "translateX(0%)";
     
     setTimeout(() => {
         loader_window.style.opacity = "0%";

@@ -13,6 +13,32 @@
     --dark-6: #2c2c38;
 }
 
+.nav-top {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0.313rem;
+    padding: 0.313rem;
+}
+
+.nav-top li {
+    display: inline-block;
+    margin: 0 0.313rem;
+    padding: 0 1.25rem;
+    font-size: 1rem;
+    background-color: var(--dark-4);
+    border: none;
+    border-radius: 0.625rem;
+}
+
+.nav-top li {
+    transition: all ease-in-out 250ms;
+}
+
+.nav-top li:hover {
+    background-color: var(--dark-5);
+}
+
 .grid {
     display: grid;
     grid-template-columns: 50%;
@@ -52,7 +78,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-image: url(images/main/headline/wallpaper.jpg), linear-gradient(-45deg, var(--dark-4), var(--dark-6));
+    background-image: url(images/main/wallpaper.avif), linear-gradient(-45deg, var(--dark-4), var(--dark-6));
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -73,50 +99,6 @@
     height: 16rem;
     filter: invert(4%) sepia(24%) saturate(1677%) hue-rotate(203deg) brightness(91%) contrast(86%);
     -webkit-user-drag: none;
-}
-
-.headline img[alt="logo"] {
-    animation: rot-logo linear infinite 5s;
-}
-
-@keyframes rot-logo {
-    0% {
-        transform: rotateY(0deg);
-    }
-
-    50% {
-        transform: rotateY(180deg);
-    }
-
-    100% {
-        transform: rotateY(360deg);
-    }
-}
-
-.headline img[alt="musical note"] {
-    width: 8rem;
-    height: 8rem;
-    align-items: center;
-    filter: invert(7%) sepia(6%) saturate(3674%) hue-rotate(202deg) brightness(97%) contrast(87%);
-    animation: move-notes ease alternate infinite 2s;
-}
-
-.headline img:last-of-type,
-.headline img:first-of-type {
-    width: 4rem;
-    height: 4rem;
-    filter: invert(6%) sepia(25%) saturate(969%) hue-rotate(201deg) brightness(90%) contrast(84%);
-    animation-delay: 250ms;
-}
-
-@keyframes move-notes {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.25);
-    }
 }
 
 .about, .contact {

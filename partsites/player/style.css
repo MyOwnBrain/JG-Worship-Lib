@@ -85,6 +85,7 @@
     flex-grow: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .iframe {
@@ -92,6 +93,13 @@
     aspect-ratio: 16 / 9;
     width: 100%;
     border-radius: 0.5rem;
+    background: var(--dark-2);
+}
+
+.video span {
+    position: absolute;
+    font-size: 2rem;
+    display: block;
 }
 
 /* add window */
@@ -147,4 +155,8 @@
     border-radius: 0.5rem;
     text-align: center;
     cursor: pointer;
+}
+
+.invalid {
+    outline: 0.25rem #ff0037 solid !important;
 }

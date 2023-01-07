@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="../../styles/standard.css">
+        <link rel="stylesheet" href="style.css">
         <script src="../../scripts/loading.js" defer></script>
         <script src="../../scripts/smartphone.js" defer></script>
         <script src="script.js" defer></script>
@@ -22,7 +22,9 @@
         </div>
         <div class="add_window" id="add_window">
             <div class="add_popup">
-                <span>Enter Video URL:</span>
+                <span>Enter Title: (optional)</span>
+                <input type="text" placeholder="can be anything">
+                <span>Enter Video URL: (required)</span>
                 <input type="url" placeholder="only YouTube supported yet">
                 <div class="add_control">
                     <button id="add_cancel">Cancel</button>
@@ -57,15 +59,12 @@
                     <button id="add">+</button>
                     <button id="play"><img src="../../images/sidebar/player.png" alt="play"></button>
                 </div>
-                <ul class="queue_list">
-                    <li draggable="true">1</li>
-                    <li draggable="true">2</li>
-                    <li draggable="true">3</li>
-                    <li draggable="true">4</li>
+                <ul class="queue_list" id="queue_list">
                 </ul>
             </div>
-            <div class="video">
-                <iframe class="iframe" id="iframe" src="https://www.youtube.com/embed/TTBcD7qs4uU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video" id="video">
+                <iframe class="iframe" id="iframe" src="http://" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <span id="video_none">No Video Loaded</span>
             </div>
         </main>
     </body>

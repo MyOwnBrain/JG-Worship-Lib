@@ -1,5 +1,3 @@
-const main = document.getElementById("main");
-
 // scroll
 
 const to_about = document.getElementById("to-about");
@@ -7,7 +5,7 @@ const about = document.getElementById("about");
 
 to_about.addEventListener("click", () => {
     main.scrollTo({
-        top: about.getBoundingClientRect().top - 50 - 10,
+        top: about.getBoundingClientRect().top - 50 - 8,
         left: 0,
         behavior: "smooth"
     })
@@ -18,7 +16,7 @@ const contact = document.getElementById("contact");
 
 to_contact.addEventListener("click", () => {
     main.scrollTo({
-        top: contact.getBoundingClientRect().top - 50 - 10,
+        top: contact.getBoundingClientRect().top - 50 - 8,
         left: 0,
         behavior: "smooth"
     })
