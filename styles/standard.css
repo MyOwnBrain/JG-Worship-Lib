@@ -40,10 +40,6 @@ body {
     scroll-behavior: smooth;
 }
 
-a {
-    all: unset;
-}
-
 /* loader */
 
 .loader-window {
@@ -99,6 +95,10 @@ header {
     box-sizing: border-box;
     user-select: none;
     z-index: 1;
+}
+
+header a {
+    all: unset;
 }
 
 .title {
