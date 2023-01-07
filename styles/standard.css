@@ -20,7 +20,7 @@
 @font-face {
     font-family: "poppins";
     src: url(../fonts/poppins/Poppins-Medium.ttf);
-    font-display: optional;
+    font-display: auto;
 }
 
 /* all */
@@ -109,6 +109,8 @@ header {
 }
 
 .title img {
+    width: auto;
+    height: auto;
     max-width: 2rem;
     max-height: 2rem;
     filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
