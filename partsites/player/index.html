@@ -20,6 +20,10 @@
                 </div>
             </div>
         </div>
+        <div class="pause_screen" id="pause_screen">
+            <img src="../../images/logo/filled.png" alt="logo">
+            <span>Lobpreis</span>
+        </div>
         <div class="add_window" id="add_window">
             <div class="add_popup">
                 <span>Enter Title: (optional)</span>
@@ -63,8 +67,12 @@
                 </ul>
             </div>
             <div class="video" id="video">
-                <iframe class="iframe" id="iframe" src="http://" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="iframe" id="iframe" src="http://" title="Youtube Video Embed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <span id="video_none">No Video Loaded</span>
+                <div class="video_ctrl">
+                    <button id="pause_screen_toggle">Pause Screen</button>
+                    <button id="next">Next</button>
+                </div>
             </div>
         </main>
     </body>
