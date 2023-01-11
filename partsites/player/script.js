@@ -6,6 +6,9 @@ const queue_list = document.getElementById("queue_list");
 const video = document.getElementById("video");
 let video_info;
 let text;
+let delete_li;
+
+// add
 
 add.addEventListener("click", () => {
     add_window.style.display = "flex";
@@ -21,7 +24,12 @@ add_submit.addEventListener("click", () => {
     
     if (video_info[1].value.startsWith("https://www.youtube.com/watch?v=")) {
         video_info[0].value = /[a-zA-Z0-9,./#+-]/g.test(video_info[0].value) ? video_info[0].value : "untitled";
-        queue_list.innerHTML += `<li data-token="${video_info[1].value.split(/[=&]+/)[1]}" draggable="true">${video_info[0].value}</li>`
+        queue_list.innerHTML += `
+            <li data-token="${video_info[1].value.split(/[=&]+/)[1]}" draggable="true">
+                <span>${video_info[0].value}</span>
+                <button><img src="../../images/player/trash.png" alt="trash"></button>
+            </li>
+        `
     } else {
         video_info[1].classList.add("invalid");
         return
@@ -30,8 +38,22 @@ add_submit.addEventListener("click", () => {
     add_window.style.display = "none";
     video_info[0].value = "";
     video_info[1].value = "";
-    video_info[1].classList.remove("invalid")
+    video_info[1].classList.remove("invalid");
+    defDelete();
+
 })
+
+// delete form queue
+
+function defDelete() {
+    queue_list.querySelectorAll("li button").forEach((it) => {
+        it.addEventListener("click", (e) => {
+            e.composedPath()[1].remove();
+        })
+    })
+}
+
+// play
 
 const play = document.getElementById("play");
 const next = document.getElementById("next");
@@ -59,6 +81,8 @@ function updateIframe(song_index) {
         background: var(--dark-3);
     `;
 }
+
+// pause screen
 
 const pause_screen_toggle = document.getElementById("pause_screen_toggle");
 const pause_screen = document.getElementById("pause_screen");

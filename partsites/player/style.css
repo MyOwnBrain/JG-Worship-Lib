@@ -76,6 +76,23 @@
     border-radius: 0.5rem;
     overflow: hidden;
     background: var(--dark-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.queue_list li button {
+    all: unset;
+    height: 1rem;
+    width: 1rem;
+    display: flex;
+}
+
+.queue_list li button img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
+    pointer-events: none;
 }
 
 /* add window */
