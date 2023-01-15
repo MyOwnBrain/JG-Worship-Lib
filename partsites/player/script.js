@@ -100,24 +100,16 @@ play.addEventListener("click", () => {
         play.children[0].src = "../../images/player/stop.png"
         song_index++;
     } else {
-        song_index = 0;
-        Array.prototype.map.call(queue_list.children, (item) => {
-            item.style = `
-                color: var(--font-color);
-                background: var(--dark-4);
-            `;
-        })
-        video.children.iframe.src = "https://";
-        video.children.video_none.style.display = "block";
-        play.children[0].src = "../../images/sidebar/player.png";
+        playerReset();
     }
 })
 
 next.addEventListener("click", () => {
     try {
         updateIframe(song_index);
+        song_index++;
     } catch {
-        play.click()
+        playerReset();
     }
 })
 
@@ -127,6 +119,19 @@ function updateIframe(song_index) {
         color: var(--placeholder);
         background: var(--dark-3);
     `;
+}
+
+function playerReset() {
+    song_index = 0;
+    Array.prototype.map.call(queue_list.children, (item) => {
+        item.style = `
+            color: var(--font-color);
+            background: var(--dark-4);
+        `;
+    })
+    video.children.iframe.src = "https://";
+    video.children.video_none.style.display = "block";
+    play.children[0].src = "../../images/sidebar/player.png";
 }
 
 // pause screen
