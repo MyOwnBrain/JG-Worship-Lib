@@ -3,9 +3,9 @@ const add = document.getElementById("add"),
     add_cancel = document.getElementById("add_cancel"),
     add_submit = document.getElementById("add_submit"),
     video = document.getElementById("video");
-let video_info,
+let video_info = add_window.querySelectorAll("div input"),
     text,
-    delete_li;
+    delete_li,
     queue_list = document.getElementById("queue_list");
 
 // add
@@ -16,7 +16,9 @@ add.addEventListener("click", () => {
 
 add_cancel.addEventListener("click", () => {
     add_window.style.display = "none";
-    video_info[1].value = "";
+    video_info.forEach((item) => {
+        item.value = ""
+    })
 })
 
 add_submit.addEventListener("click", () => {
@@ -59,7 +61,6 @@ function defDelete() {
 function reorderQueue() {
     queue_list = document.getElementById("queue_list");
     Array.prototype.map.call(queue_list.children, (item) => {
-        console.log(item)
         item.ondrag = handleDrag;
         item.ondragend = handleDrop;
     });
@@ -70,11 +71,17 @@ reorderQueue();
 function handleDrag(item) {
     const selectedItem = item.target,
         list = selectedItem.parentNode,
-        x = event.clientX,
-        y = event.clientY;
+        x = item.clientX,
+        y = item.clientY;
 
     selectedItem.classList.add("drag-active");
+
+    let played = Array.from(document.getElementsByClassName("played"));
     let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
+    
+    if (played.includes(swapItem)) {
+        swapItem = selectedItem
+    }
 
     if (list === swapItem.parentNode) {
         swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
@@ -115,19 +122,15 @@ next.addEventListener("click", () => {
 
 function updateIframe(song_index) {
     video.children.iframe.src = "https://www.youtube.com/embed/" + queue_list.children[song_index].dataset.token;
-    queue_list.children[song_index].style = `
-        color: var(--placeholder);
-        background: var(--dark-3);
-    `;
+    queue_list.children[song_index].classList.add("played")
+    queue_list.children[song_index].setAttribute("draggable", false)
 }
 
 function playerReset() {
     song_index = 0;
     Array.prototype.map.call(queue_list.children, (item) => {
-        item.style = `
-            color: var(--font-color);
-            background: var(--dark-4);
-        `;
+        item.classList.remove("played")
+        item.setAttribute("draggable", true)
     })
     video.children.iframe.src = "https://";
     video.children.video_none.style.display = "block";

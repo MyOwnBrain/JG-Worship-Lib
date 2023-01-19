@@ -39,7 +39,7 @@
     gap: 0.5rem;
 }
 
-.queue_ctrl button{
+.queue_ctrl button {
     all: unset;
     box-sizing: border-box;
     position: relative;
@@ -97,11 +97,16 @@
 
 li.drag-active {
     background: transparent;
-    border: var(--dark-6) 0.25rem solid;
+    box-shadow: inset 0 0 0 0.25rem var(--dark-6);
 }
 
 li.drag-active * {
-    display: none;
+    visibility: hidden;
+}
+
+.played {
+    color: var(--placeholder);
+    background: var(--dark-3);
 }
 
 /* add window */
