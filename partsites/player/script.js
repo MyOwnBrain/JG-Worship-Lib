@@ -8,7 +8,7 @@ let video_info = add_window.querySelectorAll("div input"),
     delete_li,
     queue_list = document.getElementById("queue_list");
 
-// add
+// add to queue
 
 add.addEventListener("click", () => {
     add_window.style.display = "flex";
@@ -26,12 +26,7 @@ add_submit.addEventListener("click", () => {
 
     if (video_info[1].value.startsWith("https://www.youtube.com/watch?v=")) {
         video_info[0].value = /[a-zA-Z0-9,./#+-]/g.test(video_info[0].value) ? video_info[0].value : "untitled";
-        queue_list.innerHTML += `
-            <li data-token="${video_info[1].value.split(/[=&]+/)[1]}" draggable="true">
-                <span>${video_info[0].value}</span>
-                <button><img src="../../images/player/trash.png" alt="trash"></button>
-            </li>
-        `
+        addToQueue(video_info[1].value.split(/[=&]+/)[1], video_info[0].value)
     } else {
         video_info[1].classList.add("invalid");
         return
@@ -44,6 +39,15 @@ add_submit.addEventListener("click", () => {
     defDelete();
     reorderQueue();
 })
+
+function addToQueue(token, name) {
+    queue_list.innerHTML += `
+        <li data-token="${token}" draggable="true">
+            <span>${name}</span>
+            <button><img src="../../images/player/trash.png" alt="trash"></button>
+        </li>
+    `
+}
 
 // delete form queue
 
@@ -78,7 +82,7 @@ function handleDrag(item) {
 
     let played = Array.from(document.getElementsByClassName("played"));
     let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
-    
+
     if (played.includes(swapItem)) {
         swapItem = selectedItem
     }
@@ -91,6 +95,39 @@ function handleDrag(item) {
 
 function handleDrop(item) {
     item.target.classList.remove("drag-active");
+}
+
+// copy queue url
+
+const copy_queue = document.getElementById("copy");
+
+copy_queue.addEventListener("click", () => {
+    let token_list = [];
+    let name_list = [];
+    Array.from(queue_list.children).forEach((item) => {
+        token_list.push(item.dataset.token)
+        name_list.push(item.innerText)
+    })
+
+    let copy_url = `${window.location.href}?queue_url=${token_list.join("-")}&queue_name=${name_list.join("-")}`
+
+    if (token_list.length === 0) return;
+    navigator.clipboard.writeText(copy_url)
+})
+
+// load queue from url
+
+window.onload = () => {
+    try {
+        const params = new URLSearchParams(window.location.search)
+        let load_url = params.get("queue_url").split("-")
+        let load_name = params.get("queue_name").split("-")
+        for (let i = 0; i < load_url.length; i++) {
+            addToQueue(load_url[i], load_name[i])
+        }
+    } catch (error) {
+        console.log("no queue preset")
+    }
 }
 
 // play
