@@ -109,7 +109,7 @@ copy_queue.addEventListener("click", () => {
         name_list.push(item.innerText)
     })
 
-    let copy_url = `${window.location.href}?queue_url=${token_list.join("-")}&queue_name=${name_list.join("-")}`
+    let copy_url = `${window.location.href}?queue_url=${token_list.join("§")}&queue_name=${name_list.join("§")}`
 
     if (token_list.length === 0) return;
     navigator.clipboard.writeText(copy_url)
@@ -120,8 +120,8 @@ copy_queue.addEventListener("click", () => {
 window.onload = () => {
     try {
         const params = new URLSearchParams(window.location.search)
-        let load_url = params.get("queue_url").split("-")
-        let load_name = params.get("queue_name").split("-")
+        let load_url = params.get("queue_url").split("§")
+        let load_name = params.get("queue_name").split("§")
         for (let i = 0; i < load_url.length; i++) {
             addToQueue(load_url[i], load_name[i])
         }
