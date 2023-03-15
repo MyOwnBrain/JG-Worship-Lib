@@ -6,7 +6,8 @@ const add = document.getElementById("add"),
 let video_info = add_window.querySelectorAll("div input"),
     text,
     delete_li,
-    queue_list = document.getElementById("queue_list");
+    queue_list = document.getElementById("queue_list"),
+    iframe = document.getElementById("iframe");
 
 // add to queue
 
@@ -150,6 +151,10 @@ play.addEventListener("click", () => {
 
 next.addEventListener("click", () => {
     try {
+        if (song_index === 0) {
+            video.children.video_none.style.display = "none";
+            play.children[0].src = "../../images/player/stop.png"
+        }
         updateIframe(song_index);
         song_index++;
     } catch {
@@ -158,9 +163,10 @@ next.addEventListener("click", () => {
 })
 
 function updateIframe(song_index) {
-    video.children.iframe.src = "https://www.youtube.com/embed/" + queue_list.children[song_index].dataset.token;
+    iframe.src = "https://www.youtube.com/embed/" + queue_list.children[song_index].dataset.token;
     queue_list.children[song_index].classList.add("played")
     queue_list.children[song_index].setAttribute("draggable", false)
+    iframe = document.getElementById("iframe")
 }
 
 function playerReset() {
@@ -169,7 +175,7 @@ function playerReset() {
         item.classList.remove("played")
         item.setAttribute("draggable", true)
     })
-    video.children.iframe.src = "https://";
+    iframe.src = "https://";
     video.children.video_none.style.display = "block";
     play.children[0].src = "../../images/sidebar/player.png";
 }
@@ -186,3 +192,32 @@ pause_screen_toggle.addEventListener("click", () => {
 pause_screen.addEventListener("dblclick", () => {
     pause_screen.style.display = "none"
 })
+
+// fullscreen
+
+const header = document.querySelector("header")
+const toggle_fullcsreen = document.querySelector("#fullscreen");
+let fullscreen_status = false
+
+toggle_fullcsreen.addEventListener("click", () => {
+    switch (fullscreen_status) {
+        case false:
+            toggleFullscreen("none", "none", "0", 1, true)
+            break
+        case true:
+            toggleFullscreen("block", "flex", "var(--bar-size)", 0, false)
+            break
+    }
+})
+
+function toggleFullscreen(side, header_queue, top_left, img_num, status) {
+    sidebar.style.display = side
+    header.style.display = header_queue
+    queue_list.parentElement.style.display = header_queue
+    setTimeout(() => {
+        main.style.top = top_left
+        main.style.left = top_left
+    }, 250);
+    toggle_fullcsreen.children[0].setAttribute("src", `../../images/player/fullscreen${img_num}.png`)
+    fullscreen_status = status
+}

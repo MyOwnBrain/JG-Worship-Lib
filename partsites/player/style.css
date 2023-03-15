@@ -20,6 +20,10 @@
     flex-direction: row;
 }
 
+img {
+    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
+}
+
 /* queue */
 
 .queue {
@@ -56,7 +60,6 @@
 .queue_ctrl button img {
     width: 1.5rem;
     height: 1.5rem;
-    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
 }
 
 .queue_list {
@@ -91,7 +94,6 @@
 .queue_list li button img {
     max-width: 100%;
     max-height: 100%;
-    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
     pointer-events: none;
 }
 
@@ -182,16 +184,13 @@ li.drag-active * {
     justify-content: center;
     flex-direction: column;
     gap: 0.5rem;
-    overflow: hidden;
     border-radius: 0.5rem;
 }
 
 .iframe {
     position: relative;
-    aspect-ratio: 16 / 9;
-    max-width: 100%;
-    max-height: 100%;
-    flex-grow: 1;
+    min-width: 100%;
+    flex: 1 0 0;
     border-radius: 0.5rem;
     background: var(--dark-2);
 }
@@ -208,14 +207,34 @@ li.drag-active * {
     justify-content: space-between;
 }
 
-.video_ctrl button {
+.video_ctrl div {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.video_ctrl div button {
     all: unset;
     padding: 0.5rem 1.5rem;
     border-radius: 0.5rem;
     background: var(--dark-3);
     cursor: pointer;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.video_ctrl div button:has(img) {
+    padding: 0.5rem;
+}
+
+.video_ctrl div button img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+
 
 /* pause screen */
 
@@ -230,14 +249,22 @@ li.drag-active * {
     justify-content: center;
     flex-direction: column;
     transition: ease 1s;
+    cursor: none;
 }
 
 .pause_screen img {
-    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%) drop-shadow(0 1rem 1rem var(--dark-1));
+    filter: 
+        invert(71%) 
+        sepia(94%) 
+        saturate(936%) 
+        hue-rotate(353deg) 
+        brightness(101%) 
+        contrast(101%) 
+        drop-shadow(0 1rem 1rem var(--dark-1));
     -webkit-user-drag: none;
 }
 
 .pause_screen span {
     font-size: 4rem;
-    filter: drop-shadow(0 1rem 2rem #000);
+    filter: drop-shadow(0 0.5rem 0.25rem var(--dark-1));
 }

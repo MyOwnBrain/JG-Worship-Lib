@@ -170,6 +170,7 @@ header {
     transition: all ease-in-out 250ms;
     overflow: hidden;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .sidebar ul li:hover {
@@ -205,6 +206,7 @@ header {
     overflow: auto;
     user-select: none;
     display: flex;
+    transition: all 250ms ease-in-out;
 }
 
 .main::-webkit-scrollbar {

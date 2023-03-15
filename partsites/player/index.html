@@ -67,11 +67,16 @@
                 <ul class="queue_list" id="queue_list"></ul>
             </div>
             <div class="video" id="video">
-                <iframe class="iframe" id="iframe" src="http://" title="Youtube Video Embed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="iframe" id="iframe" src="http://" title="Youtube Video Embed" frameborder="0" allow="picture-in-picture"></iframe>
                 <span id="video_none">No Video Loaded</span>
                 <div class="video_ctrl">
-                    <button id="pause_screen_toggle">Pause Screen</button>
-                    <button id="next">Next</button>
+                    <div>
+                        <button id="pause_screen_toggle">Pause Screen</button>
+                    </div>
+                    <div>
+                        <button id="fullscreen"><img src="../../images/player/fullscreen0.png" alt="fullscreen"></button>
+                        <button id="next">Next</button>
+                    </div>
                 </div>
             </div>
         </main>
