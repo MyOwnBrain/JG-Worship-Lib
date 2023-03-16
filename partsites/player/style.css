@@ -66,6 +66,7 @@ div:has( > .queue_list) {
     overflow: auto;
     background: var(--dark-2);
     border-radius: 0.5rem;
+    height: 100%;
 }
 
 div:has(.queue_list)::-webkit-scrollbar {
