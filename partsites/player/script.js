@@ -213,7 +213,7 @@ toggle_fullcsreen.addEventListener("click", () => {
 function toggleFullscreen(side, header_queue, top_left, img_num, status) {
     sidebar.style.display = side
     header.style.display = header_queue
-    queue_list.parentElement.style.display = header_queue
+    queue_list.parentElement.parentElement.style.display = header_queue
     setTimeout(() => {
         main.style.top = top_left
         main.style.left = top_left
