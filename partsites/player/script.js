@@ -126,6 +126,7 @@ window.onload = () => {
         for (let i = 0; i < load_url.length; i++) {
             addToQueue(load_url[i], load_name[i])
         }
+        reorderQueue()
     } catch (error) {
         console.log("no queue preset")
     }
