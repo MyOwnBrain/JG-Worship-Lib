@@ -1,18 +1,23 @@
 :root {
     font-size: 1rem;
 
-    --bar-size: 3.125rem;
+    --bar-size: 3rem;
 
     /* colors */
-    --font-color: #ffc107;
-    --dark-1: #191923;
-    --dark-2: #1e1e28;
-    --dark-3: #20202a;
-    --dark-4: #24242e;
-    --dark-5: #2b2b36;
-    --dark-6: #2c2c38;
-    --invalid: #ff0037;
-    --placeholder: #737375;
+
+    --dark-1: #0A0A0A;
+    --dark-2: #0E0E0E;
+    --dark-3: #111111;
+    --dark-4: #181818;
+    --dark-5: #262626;
+    --white: #f8f8f8;
+
+    --blue: #5F69CA;
+    --purple: #9D4EDD;
+    --red: #ff0037;
+    --orange: #FF5E1C;
+    --yellow: #FFBB00;
+    --green: #4AD295;
 }
 
 /* fonts */
@@ -33,55 +38,26 @@
 
 body {
     height: 100vh;
-    width: 100vw;
-    background: var(--dark-2);
+    width: 100%;
+    background: var(--dark-1);
     font-family: "poppins";
-    color: var(--font-color);
+    color: var(--white);
     scroll-behavior: smooth;
     user-select: none;
+    display: flex;
 }
 
 a {
     all: unset;
 }
 
-/* loader */
-
-.loader-window {
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    height: 100%;
-    background: var(--dark-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    transition: ease 1s;
-    pointer-events: none;
+img {
+    filter: invert(93%) sepia(2%) saturate(209%) hue-rotate(201deg) brightness(106%) contrast(98%);
 }
 
-.loader {
-    position: absolute;
-    overflow: hidden;
-}
-
-.load-status {
-    width: 12.5rem;
-    text-align: center;
-    font-size: 2rem;
-    border-bottom: var(--dark-6) 0.25rem solid;
-}
-
-.loader-label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-bottom: var(--font-color) 0.25rem solid;
-    transform: translateX(-100%);
-    transition: ease 1s;
+::placeholder {
+    color: var(--white);
+    opacity: 0.25;
 }
 
 /* navbar-top */
@@ -92,47 +68,49 @@ a {
 
 header {
     display: flex;
-    position: fixed;
-    width: 100%;
+    flex: 1;
     justify-content: space-between;
     height: var(--bar-size);
     background: var(--dark-2);
     box-sizing: border-box;
     user-select: none;
     z-index: 1;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .title {
     display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+    margin: 0.4rem;
     cursor: pointer;
-    margin: 0.313rem;
-    background-color: var(--dark-4);
+    background-color: var(--dark-3);
     border: none;
     border-radius: 0.5rem;
-    padding: 0.313rem;
     text-decoration: none;
 }
 
 .title img {
     max-width: 2rem;
     max-height: 2rem;
-    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
 }
 
 .title span {
     font-size: 1.25rem;
     color: var(--font-color);
-    margin-left: 0.313rem;
 }
 
 .ps_name {
     display: flex;
+    align-items: center;
     cursor: pointer;
-    margin: 0.313rem;
-    background-color: var(--dark-4);
+    margin: 0.4rem;
+    background-color: var(--dark-3);
     border: none;
-    border-radius: 0.625rem;
-    padding: 0.313rem;
+    border-radius: 0.5rem;
+    padding: 0 0.5rem;
     text-decoration: none;
 }
 
@@ -143,18 +121,15 @@ header {
 /* sidebar */
 
 .sidebar {
-    top: 3.125rem;
-    bottom: 0;
-    width: var(--bar-size);
     position: fixed;
+    top: calc(var(--bar-size) + 0.5rem);
+    bottom: 0;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    width: var(--bar-size);
     background: var(--dark-2);
     user-select: none;
     z-index: 1;
-    transition: all ease-in-out 500ms;
-}
-
-.sidebar:hover {
-    width: 15.625rem;
 }
 
 .close-sidebar {
@@ -162,51 +137,81 @@ header {
 }
 
 .sidebar ul li {
-    position: relative;
     margin: 0.5rem;
-    padding: 0.313rem 0;
+    padding: 0.25rem 0;
     border: none;
     border-radius: 0.5rem;
-    transition: all ease-in-out 250ms;
-    overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
+    position: relative;
+    list-style: none;
 }
 
-.sidebar ul li:hover {
-    background-color: var(--dark-4);
-    padding: 0.313rem;
+.sidebar ul li::before,
+.sidebar ul li::after {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    background: var(--dark-1);
+    border: var(--white) solid 0.1rem;
+    opacity: 0;
+    transition: opacity 100ms ease;
+    pointer-events: none;
+}
+
+.sidebar ul li::before {
+    content: "";
+    left: calc(100% + 1rem);
+    transform: translateY(-50%) rotate(45deg);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-bottom-left-radius: 0.25rem;
+    z-index: 999;
+    border-right: none;
+    border-top: none;
+}
+
+.sidebar ul li::after {
+    content: attr(data-text);
+    transform: translateY(-50%);
+    left: calc(100% + 1.25rem);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+
+.sidebar ul li:hover::before,
+.sidebar ul li:hover::after {
+    opacity: 1;
 }
 
 .sidebar ul li a {
     display: flex;
     text-decoration: none;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .sidebar ul li a img {
     width: 1.5rem;
     height: 1.5rem;
-    padding: 0.313rem;
-    filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
+    padding: 0.25rem;
 }
 
 /* main */
 
 .main {
+    display: flex;
     position: fixed;
-    top: var(--bar-size);
-    left: var(--bar-size);
-    bottom: 0;
-    right: 0;
+    top: calc(var(--bar-size) + 1rem);
+    left: calc(var(--bar-size) + 1rem);
+    bottom: 0.5rem;
+    right: 0.5rem;
     background-color: var(--dark-1);
     border: none;
-    border-top-left-radius: 1rem;
-    padding: 0.5rem;
+    border-radius: 0.5rem;
     overflow: auto;
     user-select: none;
-    display: flex;
-    transition: all 250ms ease-in-out;
 }
 
 .main::-webkit-scrollbar {
@@ -277,7 +282,6 @@ header {
         width: 1.25rem;
         height: 1.25rem;
         padding: 0.313rem;
-        filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
     }
 
     
@@ -306,7 +310,6 @@ header {
         width: 1.667rem;
         height: 1.667rem;
         padding: 0.417rem;
-        filter: invert(71%) sepia(94%) saturate(936%) hue-rotate(353deg) brightness(101%) contrast(101%);
     }
 }
 

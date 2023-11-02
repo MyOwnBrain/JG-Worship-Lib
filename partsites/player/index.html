@@ -4,24 +4,16 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *;">
         <link rel="stylesheet" href="../../styles/standard.css">
         <link rel="stylesheet" href="style.css">
-        <script src="../../scripts/loading.js" defer></script>
         <script src="../../scripts/smartphone.js" defer></script>
         <script src="script.js" defer></script>
         <title>Worship Lib Player</title>
     </head>
     <body>
-        <div class="loader-window" id="loader-window">
-            <div class="loader" id="loader">
-                <div class="load-status" id="load-status">
-                    <span id="percent">0%</span>
-                    <div class="loader-label" id="loader-label"></div>
-                </div>
-            </div>
-        </div>
         <div class="pause_screen" id="pause_screen">
-            <img src="../../images/logo/filled.png" alt="logo">
+            <img src="../../images/logo/outline.png" alt="logo">
             <span>Lobpreis</span>
         </div>
         <div class="add_window" id="add_window">
@@ -47,22 +39,22 @@
         </header>
         <div class="sidebar" id="sidebar">
             <ul>
-                <button class="close-sidebar" id="close-sidebar"><img src="../../images/sidebar/close.png" alt="close"></button>
-                <li><a href="../../index.html" target="_self"><img src="../../images/sidebar/home.png" alt="home">Home</a></li>
-                <li><a href="../songlist/index.html" target="_self"><img src="../../images/sidebar/list.png" alt="song_list">Song List</a></li>
-                <li><a href="index.html" target="_self"><img src="../../images/sidebar/player.png" alt="player">Player</a></li>
-                <li><a href="../generator/index.html"><img src="../../images/sidebar/random.png" alt="random_generator">Random Song</a></li>
+                <button class="close-sidebar" id="close-sidebar"><img src="../../images/sidebar/close.svg" alt="close"></button>
+                <li data-text="Home"><a href="../../index.html" target="_self"><img src="../../images/sidebar/home.svg" alt="home"></a></li>
+                <li data-text="Song List"><a href="../songlist/index.html" target="_self"><img src="../../images/sidebar/list.svg" alt="song_list"></a></li>
+                <li data-text="Player"><a href="index.html" target="_self"><img src="../../images/sidebar/play.svg" alt="player"></a></li>
+                <li data-text="Random Generator"><a href="../generator/index.html"><img src="../../images/sidebar/random.svg" alt="random_generator"></a></li>
             </ul>
         </div>
         <main class="main" id="main">
             <button class="open-sidebar" id="open-sidebar">
-                <img src="../../images/sidebar/menu.png" alt="menu">
+                <img src="../../images/sidebar/menu.svg" alt="menu">
             </button>
             <div class="queue" id="queue">
                 <div class="queue_ctrl">
-                    <button id="add">+</button>
-                    <button id="play"><img src="../../images/sidebar/player.png" alt="play"></button>
-                    <button id="copy"><img src="../../images/player/copy.png" alt="copy"></button>
+                    <button id="add"><img src="../../images/player/plus.svg" alt="add"></button>
+                    <button id="play"><img src="../../images/sidebar/play.svg" alt="play"></button>
+                    <button id="copy"><img src="../../images/player/copy.svg" alt="copy"></button>
                 </div>
                 <div>
                     <ul class="queue_list" id="queue_list"></ul>
@@ -76,7 +68,7 @@
                         <button id="pause_screen_toggle">Pause Screen</button>
                     </div>
                     <div>
-                        <button id="fullscreen"><img src="../../images/player/fullscreen0.png" alt="fullscreen"></button>
+                        <button id="fullscreen"><img src="../../images/player/expand.svg" alt="fullscreen"></button>
                         <button id="next">Next</button>
                     </div>
                 </div>

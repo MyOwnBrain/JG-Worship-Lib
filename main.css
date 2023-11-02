@@ -1,16 +1,23 @@
 :root {
     font-size: 1rem;
 
-    --bar-size: 3.125rem;
+    --bar-size: 3rem;
 
     /* colors */
-    --font-color: #ffc107;
-    --dark-1: #191923;
-    --dark-2: #1e1e28;
-    --dark-3: #20202a;
-    --dark-4: #24242e;
-    --dark-5: #2b2b36;
-    --dark-6: #2c2c38;
+
+    --dark-1: #0A0A0A;
+    --dark-2: #0E0E0E;
+    --dark-3: #111111;
+    --dark-4: #181818;
+    --dark-5: #262626;
+    --white: #f8f8f8;
+
+    --blue: #5F69CA;
+    --purple: #9D4EDD;
+    --red: #ff0037;
+    --orange: #FF5E1C;
+    --yellow: #FFBB00;
+    --green: #4AD295;
 }
 
 .nav-top {
@@ -56,10 +63,10 @@
     height: auto;
     text-align: justify;
     text-align-last: center;
-    background: linear-gradient(-45deg, var(--dark-4), var(--dark-6));
-    padding: 0.625rem;
+    background: var(--dark-2);
+    padding: 1rem;
     border: none;
-    border-radius: 0.625rem;
+    border-radius: 0.5rem;
 }
 
 .grid div:first-child {
@@ -74,30 +81,36 @@
 .grid .headline {
     grid-area: headline;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     position: relative;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    background-image: url(images/main/wallpaper.avif), linear-gradient(-45deg, var(--dark-4), var(--dark-6));
+    aspect-ratio: 3 / 1;
+}
+
+.headline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ffffff, #d0d0ff, #ffffff), url(images/main/wallpaper.png);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    aspect-ratio: 3 / 1;
+    background-blend-mode: multiply;
 }
 
 .headline h1 {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    z-index: 1;
+    font-size: 4rem;
+    filter: drop-shadow(0 0 1rem var(--dark-1));
 }
 
 .headline img {
     width: 16rem;
     height: 16rem;
-    filter: invert(4%) sepia(24%) saturate(1677%) hue-rotate(203deg) brightness(91%) contrast(86%);
     -webkit-user-drag: none;
 }
 
@@ -148,6 +161,7 @@
     margin: 0.625rem;
     transition: all ease-in-out 250ms;
     -webkit-user-drag: none;
+    filter: grayscale(1);
 }
 
 .contact p a:hover img {

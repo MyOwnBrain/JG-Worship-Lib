@@ -1,101 +1,103 @@
-const add = document.getElementById("add"),
-    add_window = document.getElementById("add_window"),
-    add_cancel = document.getElementById("add_cancel"),
-    add_submit = document.getElementById("add_submit"),
-    video = document.getElementById("video");
-let video_info = add_window.querySelectorAll("div input"),
-    text,
-    delete_li,
-    queue_list = document.getElementById("queue_list"),
-    iframe = document.getElementById("iframe");
-
 // add to queue
 
-add.addEventListener("click", () => {
-    add_window.style.display = "flex";
+const add = document.getElementById("add");
+const add_window = document.getElementById("add_window");
+const add_cancel = document.getElementById("add_cancel");
+const add_submit = document.getElementById("add_submit");
+let video_name = document.querySelectorAll("div input")[0];
+let video_token = document.querySelectorAll("div input")[1];
+
+add.addEventListener("click", () => add_window.style.display = "flex")
+
+add.addEventListener("keypress", (e) => {
+    console.log(e);
 })
 
-add_cancel.addEventListener("click", () => {
-    add_window.style.display = "none";
-    video_info.forEach((item) => {
-        item.value = ""
-    })
-})
+add_cancel.addEventListener("click", resetAddWindow)
+add_submit.addEventListener("click", submitAddFormular)
+video_name.addEventListener("keypress", (e) => { if (e.key === "Enter") submitAddFormular() })
+video_token.addEventListener("keypress", (e) => { if (e.key === "Enter") submitAddFormular() })
 
-add_submit.addEventListener("click", () => {
-    video_info = add_window.querySelectorAll("div input");
-
-    if (video_info[1].value.startsWith("https://www.youtube.com/watch?v=")) {
-        video_info[0].value = /[a-zA-Z0-9,./#+-]/g.test(video_info[0].value) ? video_info[0].value : "untitled";
-        addToQueue(video_info[1].value.split(/[=&]+/)[1], video_info[0].value)
+function submitAddFormular() {
+    if (video_token.value.startsWith("https://www.youtube.com/watch?v=")) {
+        video_name.value = /[a-zA-Z0-9,./#+-]/g.test(video_name.value) ? video_name.value : "untitled";
+        addToQueue(video_token.value.split(/[=&]+/)[1], video_name.value)
+    } else if (video_token.value.startsWith("https://youtu.be/LO29LcpoqPo?si=4GV4iPVDvwf676nT")) {
+        video_name.value = /[a-zA-Z0-9,./#+-]/g.test(video_name.value) ? video_name.value : "untitled";
+        addToQueue(video_token.value.split(/[/&]+/)[2], video_name.value)
     } else {
-        video_info[1].classList.add("invalid");
+        video_token.classList.add("invalid");
         return
     }
 
-    add_window.style.display = "none";
-    video_info[0].value = "";
-    video_info[1].value = "";
-    video_info[1].classList.remove("invalid");
-    defDelete();
-    reorderQueue();
-})
+    resetAddWindow()
+    initDeleteFromQueue()
+    reorderQueue()
+    applyClickToQueue()
+}
+
+video_token.addEventListener("input", () => video_token.classList.remove("invalid"))
+
+let queue_list = document.getElementById("queue_list");
 
 function addToQueue(token, name) {
     queue_list.innerHTML += `
         <li data-token="${token}" draggable="true">
             <span>${name}</span>
-            <button><img src="../../images/player/trash.png" alt="trash"></button>
+            <button><img src="../../images/player/trash.svg" alt="trash"></button>
         </li>
     `
 }
 
-// delete form queue
+function resetAddWindow() {
+    [video_name, video_token].forEach((item) => item.value = "");
+    add_window.style.display = "none"
+    video_token.classList.remove("invalid")
+}
 
-function defDelete() {
-    queue_list.querySelectorAll("li button").forEach((it) => {
-        it.addEventListener("click", (e) => {
+// delete from queue
+
+function initDeleteFromQueue() {
+    queue_list.querySelectorAll("li button").forEach((del_btn) => {
+        del_btn.addEventListener("click", (e) => {
             e.composedPath()[1].remove();
             reorderQueue();
         })
     })
+    applyClickToQueue()
 }
 
 // reorder queue
 
-function reorderQueue() {
-    queue_list = document.getElementById("queue_list");
-    Array.prototype.map.call(queue_list.children, (item) => {
-        item.ondrag = handleDrag;
-        item.ondragend = handleDrop;
-    });
-}
-
-reorderQueue();
-
 function handleDrag(item) {
-    const selectedItem = item.target,
-        list = selectedItem.parentNode,
-        x = item.clientX,
-        y = item.clientY;
+    const selected_item = item.target;
+    const list = selected_item.parentNode;
+    const x = item.clientX;
+    const y = item.clientY;
 
-    selectedItem.classList.add("drag-active");
+    selected_item.classList.add("drag-active");
 
     let played = Array.from(document.getElementsByClassName("played"));
-    let swapItem = document.elementFromPoint(x, y) === null ? selectedItem : document.elementFromPoint(x, y);
+    let swap_item = document.elementFromPoint(x, y) === null ? selected_item : document.elementFromPoint(x, y);
 
-    if (played.includes(swapItem)) {
-        swapItem = selectedItem
-    }
+    if (played.includes(swap_item)) swap_item = selected_item
 
-    if (list === swapItem.parentNode) {
-        swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
-        list.insertBefore(selectedItem, swapItem);
+    if (list === swap_item.parentNode) {
+        swap_item = swap_item !== selected_item.nextSibling ? swap_item : swap_item.nextSibling;
+        list.insertBefore(selected_item, swap_item);
     }
 }
 
 function handleDrop(item) {
-    item.target.classList.remove("drag-active");
+    item.target.classList.remove("drag-active")
+    applyClickToQueue()
+}
+
+function reorderQueue() {
+    Array.prototype.map.call(queue_list.children, (item) => {
+        item.ondrag = handleDrag;
+        item.ondragend = handleDrop;
+    })
 }
 
 // copy queue url
@@ -110,10 +112,10 @@ copy_queue.addEventListener("click", () => {
         name_list.push(item.innerText)
     })
 
-    let copy_url = `${window.location.href}?queue_url=${token_list.join("§")}&queue_name=${name_list.join("§")}`
+    let copy_url = `${window.location.origin + window.location.pathname}?queue_url=${token_list.join("§")}&queue_name=${name_list.join("§")}`
 
     if (token_list.length === 0) return;
-    navigator.clipboard.writeText(copy_url)
+    navigator.clipboard.writeText(copy_url);
 })
 
 // load queue from url
@@ -123,50 +125,22 @@ window.onload = () => {
         const params = new URLSearchParams(window.location.search)
         let load_url = params.get("queue_url").split("§")
         let load_name = params.get("queue_name").split("§")
-        for (let i = 0; i < load_url.length; i++) {
-            addToQueue(load_url[i], load_name[i])
-        }
-    } catch (error) {
-        console.log("no queue preset")
-    }
+        for (let i = 0; i < load_url.length; i++) addToQueue(load_url[i], load_name[i])
+        initDeleteFromQueue()
+        reorderQueue()
+        applyClickToQueue()
+    } catch { console.log("no queue preset") }
 }
 
-// play
+// play and select next video
 
-const play = document.getElementById("play");
-const next = document.getElementById("next");
-let song_index = 0;
-
-play.addEventListener("click", () => {
-    if (queue_list.children.length === 0) return;
-    video.children.video_none.style.display = "none";
-    if (song_index === 0) {
-        updateIframe(song_index);
-        play.children[0].src = "../../images/player/stop.png"
-        song_index++;
-    } else {
-        playerReset();
-    }
-})
-
-next.addEventListener("click", () => {
-    try {
-        if (song_index === 0) {
-            video.children.video_none.style.display = "none";
-            play.children[0].src = "../../images/player/stop.png"
-        }
-        updateIframe(song_index);
-        song_index++;
-    } catch {
-        playerReset();
-    }
-})
+const video = document.getElementById("video");
+let iframe = document.getElementById("iframe");
 
 function updateIframe(song_index) {
     iframe.src = "https://www.youtube.com/embed/" + queue_list.children[song_index].dataset.token;
     queue_list.children[song_index].classList.add("played")
     queue_list.children[song_index].setAttribute("draggable", false)
-    iframe = document.getElementById("iframe")
 }
 
 function playerReset() {
@@ -177,20 +151,87 @@ function playerReset() {
     })
     iframe.src = "https://";
     video.children.video_none.style.display = "block";
-    play.children[0].src = "../../images/sidebar/player.png";
+    play.children[0].src = "../../images/sidebar/play.svg";
+}
+
+const play = document.getElementById("play");
+let song_index = 0;
+
+function updateVideoDisplay() { video.children.video_none.style.display = "none"; }
+function setPlayButtonImage() { play.children[0].src = "../../images/player/stop.svg"; }
+
+function playOrNext() {
+    try {
+        if (song_index === 0) {
+            updateVideoDisplay();
+            setPlayButtonImage();
+        }
+        updateIframe(song_index);
+        song_index++;
+    } catch (error) {
+        playerReset();
+    }
+}
+
+play.addEventListener("click", () => {
+    if (song_index === 0) {
+        updateVideoDisplay();
+        setPlayButtonImage();
+        updateIframe(song_index);
+        song_index++;
+    } else playerReset();
+})
+
+const next = document.getElementById("next");
+
+next.addEventListener("click", () => {
+    try {
+        if (song_index === 0) {
+            updateVideoDisplay();
+            setPlayButtonImage();
+        }
+        updateIframe(song_index);
+        song_index++;
+    } catch (error) { playerReset(); }
+})
+
+let queue_list_li;
+
+function applyClickToQueue() {
+    queue_list_li = queue_list.querySelectorAll("li")
+    queue_list_li.forEach((li, i) => {
+        li.addEventListener("click", () => {
+            updateVideoDisplay();
+            setPlayButtonImage();
+            song_index = i;
+            updateIframe(song_index)
+            queue_list_li.forEach((e, n) => {
+                if (n <= i) {
+                    e.classList.add("played")
+                    e.setAttribute("draggable", false)
+                } else {
+                    e.classList.remove("played")
+                    e.setAttribute("draggable", true)
+                }
+            })
+        })
+    })
 }
 
 // pause screen
 
 const pause_screen_toggle = document.getElementById("pause_screen_toggle");
 const pause_screen = document.getElementById("pause_screen");
+let pause_screen_status = false;
 
 pause_screen_toggle.addEventListener("click", () => {
     pause_screen.style.display = "flex";
+    pause_screen_status = true;
 })
 
 pause_screen.addEventListener("dblclick", () => {
-    pause_screen.style.display = "none"
+    pause_screen.style.display = "none";
+    pause_screen_status = false;
 })
 
 // fullscreen
@@ -199,25 +240,42 @@ const header = document.querySelector("header")
 const toggle_fullcsreen = document.querySelector("#fullscreen");
 let fullscreen_status = false
 
-toggle_fullcsreen.addEventListener("click", () => {
-    switch (fullscreen_status) {
-        case false:
-            toggleFullscreen("none", "none", "0", 1, true)
-            break
-        case true:
-            toggleFullscreen("block", "flex", "var(--bar-size)", 0, false)
-            break
-    }
-})
+toggle_fullcsreen.addEventListener("click", () => 
+    fullscreen_status === false ?
+    toggleFullscreen("none", "none", "0.5rem", "compress", true) :
+    toggleFullscreen("block", "flex", "calc(var(--bar-size) + 1rem)", "expand", false)
+)
 
-function toggleFullscreen(side, header_queue, top_left, img_num, status) {
+function toggleFullscreen(side, header_queue, top_left, img, status) {
     sidebar.style.display = side
     header.style.display = header_queue
-    queue_list.parentElement.style.display = header_queue
-    setTimeout(() => {
-        main.style.top = top_left
-        main.style.left = top_left
-    }, 250);
-    toggle_fullcsreen.children[0].setAttribute("src", `../../images/player/fullscreen${img_num}.png`)
+    queue_list.parentElement.parentElement.style.display = header_queue
+    main.style.top = top_left
+    main.style.left = top_left
+    toggle_fullcsreen.children[0].setAttribute("src", `../../images/player/${img}.svg`)
     fullscreen_status = status
+}
+
+// shortcuts
+
+window.addEventListener("keyup", (e) => manageShortcuts(e))
+
+function manageShortcuts(event) {
+    if (!event.altKey) return;
+
+    switch (event.code) {
+        case "Digit1":
+            fullscreen_status === false ?
+            toggleFullscreen("none", "none", "0.5rem", "compress", true) :
+            toggleFullscreen("block", "flex", "calc(var(--bar-size) + 1rem)", "expand", false)
+            break;
+
+        case "Digit2":
+            next.click()
+            break;
+
+        case "Digit3":
+            !pause_screen_status ? pause_screen_toggle.click() : pause_screen.dispatchEvent(new Event("dblclick"))
+            break;
+    }
 }

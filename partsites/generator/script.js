@@ -7,9 +7,11 @@ let type_list = document.querySelectorAll("#type_list");
 let active = false;
 
 document.addEventListener("click", (e) => {
-    if (!Object.values(type_list).includes(e.target) && !Object.values(type_wrapper).includes(e.target) && active === true) {
-        close_lists()
-    }
+    if (
+        !Object.values(type_list).includes(e.target) 
+        && !Object.values(type_wrapper).includes(e.target) 
+        && active === true
+    ) close_lists()
 })
 
 function close_lists() {
@@ -78,9 +80,7 @@ add_filter.addEventListener("click", () => {
 
 const submit = document.getElementById("submit");
 
-submit.addEventListener("click", () => {
-    setFilterValues();
-})
+submit.addEventListener("click", () => setFilterValues())
 
 let filter_values = {}
 
