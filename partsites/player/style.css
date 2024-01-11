@@ -120,6 +120,7 @@ img {
 .queue_list li span {
     text-overflow: ellipsis;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .queue_list li button {
@@ -278,6 +279,7 @@ li.drag-active * {
     width: 100%;
     height: 100%;
     backdrop-filter: blur(5rem);
+    -webkit-backdrop-filter: blur(5rem);
     display: none;
     align-items: center;
     justify-content: center;
